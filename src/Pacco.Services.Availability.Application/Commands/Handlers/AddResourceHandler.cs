@@ -11,9 +11,9 @@ namespace Pacco.Services.Availability.Application.Commands.Handlers
 {
     public class AddResourceHandler : ICommandHandler<AddResource>
     {
-        private readonly IResourceRepository _resourceRepository;
+        private readonly IResourcesRepository _resourceRepository;
 
-        public AddResourceHandler(IResourceRepository resourceRepository)
+        public AddResourceHandler(IResourcesRepository resourceRepository)
         {
             _resourceRepository = resourceRepository;
         }
