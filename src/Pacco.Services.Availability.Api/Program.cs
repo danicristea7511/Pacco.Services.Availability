@@ -10,6 +10,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Pacco.Services.Availability.Application.Queries;
+using Pacco.Services.Availability.Application.DTO;
+using Pacco.Services.Availability.Application.Commands;
 
 namespace Pacco.Services.Availability.Api
 {
@@ -26,18 +29,21 @@ namespace Pacco.Services.Availability.Api
             {
                 services.AddControllers().AddNewtonsoftJson();
                 services.AddConvey()
-                    // .AddWebApi()
+                    .AddWebApi()
                     .AddApplication()
                     .AddInfrastructure()
                     .Build();
             })
-            .Configure(app => //app
-            {
-                app.UseInfrastructure();
-                app.UseRouting()
-                    .UseEndpoints(e => e.MapControllers());
-                //.UseDispatcherEndpoints(endpoints => endpoints.Get<GetResources, IEnumerable<ResourceDto>>("resources"))
-                }
-            );
+            .Configure(app => app.            
+                UseInfrastructure()
+                //UseRouting()
+                // .UseEndpoints(e => e.MapControllers());
+                .UseDispatcherEndpoints(endpoints => endpoints
+                    .Get<GetResources, IEnumerable<ResourceDto>>("resources")
+                    .Get<GetResource, ResourceDto>("resources/{resourceId}")
+                    .Post<ReserveResource>("resources/{resourceId}/reservations/{dateTime}")
+                    .Post<AddResource>("resources", afterDispatch: (cmd, ctx) =>
+                        ctx.Response.Created($"resources/{cmd.ResourceId}"))));
+                
     }
 }

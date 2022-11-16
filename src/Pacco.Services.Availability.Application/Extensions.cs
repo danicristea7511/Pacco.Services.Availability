@@ -11,8 +11,7 @@ namespace Pacco.Services.Availability.Application
     {
         public static IConveyBuilder AddApplication(this IConveyBuilder builder) =>
             builder.AddCommandHandlers()
-            .AddQueryHandlers()
-            .AddInMemoryCommandDispatcher()
-            .AddInMemoryQueryDispatcher();
+            .AddInMemoryCommandDispatcher();
+            
     }
 }

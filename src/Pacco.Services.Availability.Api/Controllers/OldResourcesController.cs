@@ -11,12 +11,12 @@ namespace Pacco.Services.Availability.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ResourcesController : ControllerBase
+    public class OldResourcesController : ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IQueryDispatcher _queryDispatcher;
 
-        public ResourcesController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
+        public OldResourcesController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
         {
             _commandDispatcher = commandDispatcher;
             _queryDispatcher = queryDispatcher;
